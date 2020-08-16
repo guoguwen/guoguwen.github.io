@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="个人空间">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="/img/avatare.jpeg">
+    <link rel="alternate" type="application/atom+xml" title="Guwen" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        身份证号码的秘密｜Guwen&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://guoguwen.github.io/2018/05/04/身份证号码的秘密/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('/img/avatare.jpeg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Guwen
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">首页</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/ABOUT/">关于</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/Tags/">书签</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/日记/">日记</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/archive/">归档</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img" src="/img/default.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('/img/default.jpg');
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>身份证号码的秘密</h1>
+                    
+                    <h2 class="subheading">JavaScript校验身份证号码</h2>
+                    
+                    <span class="meta">
+                         作者 郭固文
+                        <span>
+                          日期 2018-05-04
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#JavaScript"
+                           title="JavaScript">JavaScript</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            身份证号码的秘密
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h5 id="最近闲来无事突然想起来之前做的身份证校验一需求-能比较准确的验证身份证信息-通过此功能过滤掉水客。一般都是简单的用正则表达来检验前17位和最后一位的正确性-可是这样不严格-一个身份证包含的信息有这些。"><a href="#最近闲来无事突然想起来之前做的身份证校验一需求-能比较准确的验证身份证信息-通过此功能过滤掉水客。一般都是简单的用正则表达来检验前17位和最后一位的正确性-可是这样不严格-一个身份证包含的信息有这些。" class="headerlink" title="最近闲来无事突然想起来之前做的身份证校验一需求,能比较准确的验证身份证信息,通过此功能过滤掉水客。一般都是简单的用正则表达来检验前17位和最后一位的正确性,可是这样不严格,一个身份证包含的信息有这些。"></a>最近闲来无事突然想起来之前做的身份证校验一需求,能比较准确的验证身份证信息,通过此功能过滤掉水客。一般都是简单的用正则表达来检验前17位和最后一位的正确性,可是这样不严格,一个身份证包含的信息有这些。</h5><h2 id="1、号码的结构"><a href="#1、号码的结构" class="headerlink" title="1、号码的结构"></a>1、号码的结构</h2><h5 id="公民身份号码是特征组合码，由十七位数字本体码和一位校验码组成。排列顺序从左至右依次为：六位数字地址码，八位数字出生日期码，三位数字顺序码和一位数字校验码。"><a href="#公民身份号码是特征组合码，由十七位数字本体码和一位校验码组成。排列顺序从左至右依次为：六位数字地址码，八位数字出生日期码，三位数字顺序码和一位数字校验码。" class="headerlink" title="公民身份号码是特征组合码，由十七位数字本体码和一位校验码组成。排列顺序从左至右依次为：六位数字地址码，八位数字出生日期码，三位数字顺序码和一位数字校验码。"></a>公民身份号码是特征组合码，由十七位数字本体码和一位校验码组成。排列顺序从左至右依次为：六位数字地址码，八位数字出生日期码，三位数字顺序码和一位数字校验码。</h5><h2 id="2-地址码-前六位数）"><a href="#2-地址码-前六位数）" class="headerlink" title="2.地址码(前六位数）"></a>2.地址码(前六位数）</h2><h5 id="表示编码对象常住户口所在县-市、旗、区-的行政区划代码，按gb-T2260的规定执行。"><a href="#表示编码对象常住户口所在县-市、旗、区-的行政区划代码，按gb-T2260的规定执行。" class="headerlink" title="　表示编码对象常住户口所在县(市、旗、区)的行政区划代码，按gb/T2260的规定执行。"></a>　表示编码对象常住户口所在县(市、旗、区)的行政区划代码，按gb/T2260的规定执行。</h5><h2 id="3、出生日期码（第七位至十四位）"><a href="#3、出生日期码（第七位至十四位）" class="headerlink" title="3、出生日期码（第七位至十四位）"></a>3、出生日期码（第七位至十四位）</h2><h5 id="表示编码对象出生的年、月、日，按gb-T7408的规定执行，年、月、日代码之间不用分隔符。"><a href="#表示编码对象出生的年、月、日，按gb-T7408的规定执行，年、月、日代码之间不用分隔符。" class="headerlink" title="表示编码对象出生的年、月、日，按gb/T7408的规定执行，年、月、日代码之间不用分隔符。"></a>表示编码对象出生的年、月、日，按gb/T7408的规定执行，年、月、日代码之间不用分隔符。</h5><h2 id="4、顺序码（第十五位至十七位）"><a href="#4、顺序码（第十五位至十七位）" class="headerlink" title="4、顺序码（第十五位至十七位）"></a>4、顺序码（第十五位至十七位）</h2><h5 id="表示在同一地址码所标识的区域范围内，对同年、同月、同日出生的人编定的顺序号，顺序码的奇数分配给男性，偶数分配给女性。"><a href="#表示在同一地址码所标识的区域范围内，对同年、同月、同日出生的人编定的顺序号，顺序码的奇数分配给男性，偶数分配给女性。" class="headerlink" title="表示在同一地址码所标识的区域范围内，对同年、同月、同日出生的人编定的顺序号，顺序码的奇数分配给男性，偶数分配给女性。"></a>表示在同一地址码所标识的区域范围内，对同年、同月、同日出生的人编定的顺序号，顺序码的奇数分配给男性，偶数分配给女性。</h5><h2 id="5、校验码（第十八位数）"><a href="#5、校验码（第十八位数）" class="headerlink" title="5、校验码（第十八位数）"></a>5、校验码（第十八位数）</h2><h5 id="作为尾号的校验码，是由号码编制单位按统一的公式计算出来的，如果某人的尾号是0－9，都不会出现X，但如果尾号是10，那么就得用X来代替，因为如果用10做尾号，那么-此人的身份证就变成了19位。X是罗马数字的10，用X来代替10，可以保证公民的身份证符合国家标准。"><a href="#作为尾号的校验码，是由号码编制单位按统一的公式计算出来的，如果某人的尾号是0－9，都不会出现X，但如果尾号是10，那么就得用X来代替，因为如果用10做尾号，那么-此人的身份证就变成了19位。X是罗马数字的10，用X来代替10，可以保证公民的身份证符合国家标准。" class="headerlink" title="作为尾号的校验码，是由号码编制单位按统一的公式计算出来的，如果某人的尾号是0－9，都不会出现X，但如果尾号是10，那么就得用X来代替，因为如果用10做尾号，那么 此人的身份证就变成了19位。X是罗马数字的10，用X来代替10，可以保证公民的身份证符合国家标准。"></a>作为尾号的校验码，是由号码编制单位按统一的公式计算出来的，如果某人的尾号是0－9，都不会出现X，但如果尾号是10，那么就得用X来代替，因为如果用10做尾号，那么 此人的身份证就变成了19位。X是罗马数字的10，用X来代替10，可以保证公民的身份证符合国家标准。</h5><h2 id="编码实现"><a href="#编码实现" class="headerlink" title="编码实现"></a>编码实现</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">1.简单实现</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> isCard(card)&#123;</span><br><span class="line">	var aCity=&#123;11:<span class="string">"北京"</span>,12:<span class="string">"天津"</span>,13:<span class="string">"河北"</span>,14:<span class="string">"山西"</span>,15:<span class="string">"内蒙古"</span>,21:<span class="string">"辽宁"</span>,</span><br><span class="line">		22:<span class="string">"吉林"</span>,23:<span class="string">"黑龙江"</span>,31:<span class="string">"上海"</span>,32:<span class="string">"江苏"</span>,33:<span class="string">"浙江"</span>,34:<span class="string">"安徽"</span>,35:<span class="string">"福建"</span>,</span><br><span class="line">		36:<span class="string">"江西"</span>,37:<span class="string">"山东"</span>,41:<span class="string">"河南"</span>,42:<span class="string">"湖北"</span>,43:<span class="string">"湖南"</span>,44:<span class="string">"广东"</span>,45:<span class="string">"广西"</span>,</span><br><span class="line">		46:<span class="string">"海南"</span>,50:<span class="string">"重庆"</span>,51:<span class="string">"四川"</span>,52:<span class="string">"贵州"</span>,53:<span class="string">"云南"</span>,54:<span class="string">"西藏"</span>,61:<span class="string">"陕西"</span>,</span><br><span class="line">		62:<span class="string">"甘肃"</span>,63:<span class="string">"青海"</span>,64:<span class="string">"宁夏"</span>,65:<span class="string">"新疆"</span>,71:<span class="string">"台湾"</span>,81:<span class="string">"香港"</span>,82:<span class="string">"澳门"</span>,91:<span class="string">"国外"</span>&#125;;</span><br><span class="line">	var vi = [<span class="string">'1'</span>,<span class="string">'0'</span>,<span class="string">'X'</span>,<span class="string">'9'</span>,<span class="string">'8'</span>,<span class="string">'7'</span>,<span class="string">'6'</span>,<span class="string">'5'</span>,<span class="string">'4'</span>,<span class="string">'3'</span>,<span class="string">'2'</span>]; //末尾校验</span><br><span class="line">	var wi = [7,9,10,5,8,4,2,1,6,3,7,9,10,5,8,4,2]; //加权因子</span><br><span class="line">	var sum = 0;</span><br><span class="line">	<span class="keyword">for</span> (var i = 0,len=card.length; i &lt; len-1; i++) &#123;</span><br><span class="line">	 	sum += wi[i]*card.charAt(i);</span><br><span class="line">	&#125; </span><br><span class="line">	var mod = sum%11;</span><br><span class="line">	console.log(vi[mod]);</span><br><span class="line">	<span class="keyword">if</span>(vi[mod] === card[17])</span><br><span class="line">		console.log(<span class="string">'省份证号码正确'</span>);</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		console.log(<span class="string">'身份证号码不正确'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">isCard(<span class="string">'41142119999999999'</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">2. 正则表达式判断</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> isCardID(sId)&#123;</span><br><span class="line"> var iSum=0 ;</span><br><span class="line"> var info=<span class="string">""</span> ;</span><br><span class="line"> <span class="keyword">if</span>(!/^\d&#123;17&#125;(\d|x)$/i.test(sId)) <span class="built_in">return</span> <span class="string">"你输入的身份证长度或格式错误"</span>;</span><br><span class="line"> sId=sId.replace(/x$/i,<span class="string">"a"</span>);</span><br><span class="line"> <span class="keyword">if</span>(aCity[parseInt(sId.substr(0,2))]==null) <span class="built_in">return</span> <span class="string">"你的身份证地区非法"</span>;</span><br><span class="line"> sBirthday=sId.substr(6,4)+<span class="string">"-"</span>+Number(sId.substr(10,2))+<span class="string">"-"</span>+Number(sId.substr(12,2));</span><br><span class="line"> var d=new Date(sBirthday.replace(/-/g,<span class="string">"/"</span>)) ;</span><br><span class="line"> <span class="keyword">if</span>(sBirthday!=(d.getFullYear()+<span class="string">"-"</span>+ (d.getMonth()+1) + <span class="string">"-"</span> + d.getDate()))<span class="built_in">return</span> <span class="string">"身份证上的出生日期非法"</span>;</span><br><span class="line"> <span class="keyword">for</span>(var i = 17;i&gt;=0;i --) iSum += (Math.pow(2,i) % 11) * parseInt(sId.charAt(17 - i),11) ;</span><br><span class="line"> <span class="keyword">if</span>(iSum%11!=1) <span class="built_in">return</span> <span class="string">"你输入的身份证号非法"</span>;</span><br><span class="line"> //aCity[parseInt(sId.substr(0,2))]+<span class="string">","</span>+sBirthday+<span class="string">","</span>+(sId.substr(16,1)%2?<span class="string">"男"</span>:<span class="string">"女"</span>);//此次还可以判断出输入的身份证号的人性别</span><br><span class="line"> <span class="built_in">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br></pre></td><td class="code"><pre><span class="line">3.网上参考</span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">scCard</span></span>()&#123; </span><br><span class="line"> var scType=document.getElementById(<span class="string">"sc_card_type"</span>).value; </span><br><span class="line"> <span class="keyword">if</span>(scType==<span class="string">"1"</span>)&#123; </span><br><span class="line">  var scCard=document.getElementById(<span class="string">"sc_card_num"</span>).value; </span><br><span class="line">      <span class="keyword">if</span>(scCard.length!=0)&#123; </span><br><span class="line">      <span class="keyword">if</span>(!checkCard(scCard))&#123; </span><br><span class="line">      $(<span class="string">"#errorTips"</span>).html(<span class="string">"身份证号码格式错误"</span>); </span><br><span class="line">      &#125;<span class="keyword">else</span>&#123; </span><br><span class="line">      $(<span class="string">"#errorTips"</span>).html(<span class="string">""</span>); </span><br><span class="line">      &#125; </span><br><span class="line">      &#125; </span><br><span class="line"> &#125; </span><br><span class="line"> <span class="built_in">return</span> <span class="literal">false</span>; </span><br><span class="line"> &#125; </span><br><span class="line"> //<span class="keyword">function</span> checkidno(obj) &#123; </span><br><span class="line">  var vcity=&#123; 11:<span class="string">"北京"</span>,12:<span class="string">"天津"</span>,13:<span class="string">"河北"</span>,14:<span class="string">"山西"</span>,15:<span class="string">"内蒙古"</span>, </span><br><span class="line">    21:<span class="string">"辽宁"</span>,22:<span class="string">"吉林"</span>,23:<span class="string">"黑龙江"</span>,31:<span class="string">"上海"</span>,32:<span class="string">"江苏"</span>, </span><br><span class="line">    33:<span class="string">"浙江"</span>,34:<span class="string">"安徽"</span>,35:<span class="string">"福建"</span>,36:<span class="string">"江西"</span>,37:<span class="string">"山东"</span>,41:<span class="string">"河南"</span>, </span><br><span class="line">    42:<span class="string">"湖北"</span>,43:<span class="string">"湖南"</span>,44:<span class="string">"广东"</span>,45:<span class="string">"广西"</span>,46:<span class="string">"海南"</span>,50:<span class="string">"重庆"</span>, </span><br><span class="line">    51:<span class="string">"四川"</span>,52:<span class="string">"贵州"</span>,53:<span class="string">"云南"</span>,54:<span class="string">"西藏"</span>,61:<span class="string">"陕西"</span>,62:<span class="string">"甘肃"</span>, </span><br><span class="line">    63:<span class="string">"青海"</span>,64:<span class="string">"宁夏"</span>,65:<span class="string">"新疆"</span>,71:<span class="string">"台湾"</span>,81:<span class="string">"香港"</span>,82:<span class="string">"澳门"</span>,91:<span class="string">"国外"</span></span><br><span class="line">   &#125;; </span><br><span class="line"> checkCard = <span class="keyword">function</span>(obj) </span><br><span class="line"> &#123; </span><br><span class="line">  //var card = document.getElementById(<span class="string">'card_no'</span>).value; </span><br><span class="line">  //是否为空 </span><br><span class="line">  // <span class="keyword">if</span>(card === <span class="string">''</span>) </span><br><span class="line">  // &#123; </span><br><span class="line">  //  <span class="built_in">return</span> <span class="literal">false</span>; </span><br><span class="line">  //&#125; </span><br><span class="line">  //校验长度，类型 </span><br><span class="line">  <span class="keyword">if</span>(isCardNo(obj) === <span class="literal">false</span>) </span><br><span class="line">  &#123; </span><br><span class="line">   <span class="built_in">return</span> <span class="literal">false</span>; </span><br><span class="line">  &#125; </span><br><span class="line">  //检查省份 </span><br><span class="line">  <span class="keyword">if</span>(checkProvince(obj) === <span class="literal">false</span>) </span><br><span class="line">  &#123; </span><br><span class="line">   <span class="built_in">return</span> <span class="literal">false</span>; </span><br><span class="line">  &#125; </span><br><span class="line">  //校验生日 </span><br><span class="line">  <span class="keyword">if</span>(checkBirthday(obj) === <span class="literal">false</span>) </span><br><span class="line">  &#123; </span><br><span class="line">   <span class="built_in">return</span> <span class="literal">false</span>; </span><br><span class="line">  &#125; </span><br><span class="line">  //检验位的检测 </span><br><span class="line">  <span class="keyword">if</span>(checkParity(obj) === <span class="literal">false</span>) </span><br><span class="line">  &#123; </span><br><span class="line">   <span class="built_in">return</span> <span class="literal">false</span>; </span><br><span class="line">  &#125; </span><br><span class="line">  <span class="built_in">return</span> <span class="literal">true</span>; </span><br><span class="line"> &#125;; </span><br><span class="line"> //检查号码是否符合规范，包括长度，类型 </span><br><span class="line"> isCardNo = <span class="keyword">function</span>(obj) </span><br><span class="line"> &#123; </span><br><span class="line">  //身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X </span><br><span class="line">  var reg = /(^\d&#123;15&#125;$)|(^\d&#123;17&#125;(\d|X)$)/; </span><br><span class="line">  <span class="keyword">if</span>(reg.test(obj) === <span class="literal">false</span>) </span><br><span class="line">  &#123; </span><br><span class="line">   <span class="built_in">return</span> <span class="literal">false</span>; </span><br><span class="line">  &#125; </span><br><span class="line">  <span class="built_in">return</span> <span class="literal">true</span>; </span><br><span class="line"> &#125;; </span><br><span class="line"> //取身份证前两位,校验省份 </span><br><span class="line"> checkProvince = <span class="keyword">function</span>(obj) </span><br><span class="line"> &#123; </span><br><span class="line">  var province = obj.substr(0,2); </span><br><span class="line">  <span class="keyword">if</span>(vcity[province] == undefined) </span><br><span class="line">  &#123; </span><br><span class="line">   <span class="built_in">return</span> <span class="literal">false</span>; </span><br><span class="line">  &#125; </span><br><span class="line">  <span class="built_in">return</span> <span class="literal">true</span>; </span><br><span class="line"> &#125;; </span><br><span class="line"> //检查生日是否正确 </span><br><span class="line"> checkBirthday = <span class="keyword">function</span>(obj) </span><br><span class="line"> &#123; </span><br><span class="line">  var len = obj.length; </span><br><span class="line">  //身份证15位时，次序为省（3位）市（3位）年（2位）月（2位）日（2位）校验位（3位），皆为数字 </span><br><span class="line">  <span class="keyword">if</span>(len == <span class="string">'15'</span>) </span><br><span class="line">  &#123; </span><br><span class="line">   var re_fifteen = /^(\d&#123;6&#125;)(\d&#123;2&#125;)(\d&#123;2&#125;)(\d&#123;2&#125;)(\d&#123;3&#125;)$/; </span><br><span class="line">   var arr_data = obj.match(re_fifteen); </span><br><span class="line">   var year = arr_data[2]; </span><br><span class="line">   var month = arr_data[3]; </span><br><span class="line">   var day = arr_data[4]; </span><br><span class="line">   var birthday = new Date(<span class="string">'19'</span>+year+<span class="string">'/'</span>+month+<span class="string">'/'</span>+day); </span><br><span class="line">   <span class="built_in">return</span> verifyBirthday(<span class="string">'19'</span>+year,month,day,birthday); </span><br><span class="line">  &#125; </span><br><span class="line">  //身份证18位时，次序为省（3位）市（3位）年（4位）月（2位）日（2位）校验位（4位），校验位末尾可能为X </span><br><span class="line">  <span class="keyword">if</span>(len == <span class="string">'18'</span>) </span><br><span class="line">  &#123; </span><br><span class="line">   var re_eighteen = /^(\d&#123;6&#125;)(\d&#123;4&#125;)(\d&#123;2&#125;)(\d&#123;2&#125;)(\d&#123;3&#125;)([0-9]|X)$/; </span><br><span class="line">   var arr_data = obj.match(re_eighteen); </span><br><span class="line">   var year = arr_data[2]; </span><br><span class="line">   var month = arr_data[3]; </span><br><span class="line">   var day = arr_data[4]; </span><br><span class="line">   var birthday = new Date(year+<span class="string">'/'</span>+month+<span class="string">'/'</span>+day); </span><br><span class="line">   <span class="built_in">return</span> verifyBirthday(year,month,day,birthday); </span><br><span class="line">  &#125; </span><br><span class="line">  <span class="built_in">return</span> <span class="literal">false</span>; </span><br><span class="line"> &#125;; </span><br><span class="line"> //校验日期 </span><br><span class="line"> verifyBirthday = <span class="keyword">function</span>(year,month,day,birthday) </span><br><span class="line"> &#123; </span><br><span class="line">  var now = new Date(); </span><br><span class="line">  var now_year = now.getFullYear(); </span><br><span class="line">  //年月日是否合理 </span><br><span class="line">  <span class="keyword">if</span>(birthday.getFullYear() == year &amp;&amp; (birthday.getMonth() + 1) == month &amp;&amp; birthday.getDate() == day) </span><br><span class="line">  &#123; </span><br><span class="line">   //判断年份的范围（3岁到100岁之间) </span><br><span class="line">   var time = now_year - year; </span><br><span class="line">   <span class="keyword">if</span>(time &gt;= 0 &amp;&amp; time &lt;= 130) </span><br><span class="line">   &#123; </span><br><span class="line">    <span class="built_in">return</span> <span class="literal">true</span>; </span><br><span class="line">   &#125; </span><br><span class="line">   <span class="built_in">return</span> <span class="literal">false</span>; </span><br><span class="line">  &#125; </span><br><span class="line">  <span class="built_in">return</span> <span class="literal">false</span>; </span><br><span class="line"> &#125;; </span><br><span class="line"> //校验位的检测 </span><br><span class="line"> checkParity = <span class="keyword">function</span>(obj) </span><br><span class="line"> &#123; </span><br><span class="line">  //15位转18位 </span><br><span class="line">  obj = changeFivteenToEighteen(obj); </span><br><span class="line">  var len = obj.length; </span><br><span class="line">  <span class="keyword">if</span>(len == <span class="string">'18'</span>) </span><br><span class="line">  &#123; </span><br><span class="line">   var arrInt = new Array(7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2); </span><br><span class="line">   var arrCh = new Array(<span class="string">'1'</span>, <span class="string">'0'</span>, <span class="string">'X'</span>, <span class="string">'9'</span>, <span class="string">'8'</span>, <span class="string">'7'</span>, <span class="string">'6'</span>, <span class="string">'5'</span>, <span class="string">'4'</span>, <span class="string">'3'</span>, <span class="string">'2'</span>); </span><br><span class="line">   var cardTemp = 0, i, valnum; </span><br><span class="line">   <span class="keyword">for</span>(i = 0; i &lt; 17; i ++) </span><br><span class="line">   &#123; </span><br><span class="line">    cardTemp += obj.substr(i, 1) * arrInt[i]; </span><br><span class="line">   &#125; </span><br><span class="line">   valnum = arrCh[cardTemp % 11]; </span><br><span class="line">   <span class="keyword">if</span> (valnum == obj.substr(17, 1)) </span><br><span class="line">   &#123; </span><br><span class="line">    <span class="built_in">return</span> <span class="literal">true</span>; </span><br><span class="line">   &#125; </span><br><span class="line">   <span class="built_in">return</span> <span class="literal">false</span>; </span><br><span class="line">  &#125; </span><br><span class="line">  <span class="built_in">return</span> <span class="literal">false</span>; </span><br><span class="line"> &#125;; </span><br><span class="line"> //15位转18位身份证号 </span><br><span class="line"> changeFivteenToEighteen = <span class="keyword">function</span>(obj) </span><br><span class="line"> &#123; </span><br><span class="line">  <span class="keyword">if</span>(obj.length == <span class="string">'15'</span>) </span><br><span class="line">  &#123; </span><br><span class="line">   var arrInt = new Array(7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2); </span><br><span class="line">   var arrCh = new Array(<span class="string">'1'</span>, <span class="string">'0'</span>, <span class="string">'X'</span>, <span class="string">'9'</span>, <span class="string">'8'</span>, <span class="string">'7'</span>, <span class="string">'6'</span>, <span class="string">'5'</span>, <span class="string">'4'</span>, <span class="string">'3'</span>, <span class="string">'2'</span>); </span><br><span class="line">   var cardTemp = 0, i;  </span><br><span class="line">   obj = obj.substr(0, 6) + <span class="string">'19'</span> + obj.substr(6, obj.length - 6); </span><br><span class="line">   <span class="keyword">for</span>(i = 0; i &lt; 17; i ++) </span><br><span class="line">   &#123; </span><br><span class="line">    cardTemp += obj.substr(i, 1) * arrInt[i]; </span><br><span class="line">   &#125; </span><br><span class="line">   obj += arrCh[cardTemp % 11]; </span><br><span class="line">   <span class="built_in">return</span> obj; </span><br><span class="line">  &#125; </span><br><span class="line">  <span class="built_in">return</span> obj; </span><br><span class="line"> &#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><h5 id="参考文档1参考文档2"><a href="#参考文档1参考文档2" class="headerlink" title="参考文档1参考文档2"></a><a href="http://www.jb51.net/article/72189.htm" target="_blank" rel="noopener">参考文档1</a><a href="https://jingyan.baidu.com/article/76a7e409b77a27fc3a6e1555.html" target="_blank" rel="noopener">参考文档2</a></h5>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2018/05/11/JavaScript中的变量提升/" data-toggle="tooltip" data-placement="top"
+                           title="JavaScript中的变量提升">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2018/04/27/宣州谢朓楼饯别校书叔云/" data-toggle="tooltip" data-placement="top"
+                           title="宣州谢朓楼饯别校书叔云">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#最近闲来无事突然想起来之前做的身份证校验一需求-能比较准确的验证身份证信息-通过此功能过滤掉水客。一般都是简单的用正则表达来检验前17位和最后一位的正确性-可是这样不严格-一个身份证包含的信息有这些。"><span class="toc-text">最近闲来无事突然想起来之前做的身份证校验一需求,能比较准确的验证身份证信息,通过此功能过滤掉水客。一般都是简单的用正则表达来检验前17位和最后一位的正确性,可是这样不严格,一个身份证包含的信息有这些。</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1、号码的结构"><span class="toc-text">1、号码的结构</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#公民身份号码是特征组合码，由十七位数字本体码和一位校验码组成。排列顺序从左至右依次为：六位数字地址码，八位数字出生日期码，三位数字顺序码和一位数字校验码。"><span class="toc-text">公民身份号码是特征组合码，由十七位数字本体码和一位校验码组成。排列顺序从左至右依次为：六位数字地址码，八位数字出生日期码，三位数字顺序码和一位数字校验码。</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-地址码-前六位数）"><span class="toc-text">2.地址码(前六位数）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#表示编码对象常住户口所在县-市、旗、区-的行政区划代码，按gb-T2260的规定执行。"><span class="toc-text">　表示编码对象常住户口所在县(市、旗、区)的行政区划代码，按gb/T2260的规定执行。</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、出生日期码（第七位至十四位）"><span class="toc-text">3、出生日期码（第七位至十四位）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#表示编码对象出生的年、月、日，按gb-T7408的规定执行，年、月、日代码之间不用分隔符。"><span class="toc-text">表示编码对象出生的年、月、日，按gb/T7408的规定执行，年、月、日代码之间不用分隔符。</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、顺序码（第十五位至十七位）"><span class="toc-text">4、顺序码（第十五位至十七位）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#表示在同一地址码所标识的区域范围内，对同年、同月、同日出生的人编定的顺序号，顺序码的奇数分配给男性，偶数分配给女性。"><span class="toc-text">表示在同一地址码所标识的区域范围内，对同年、同月、同日出生的人编定的顺序号，顺序码的奇数分配给男性，偶数分配给女性。</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、校验码（第十八位数）"><span class="toc-text">5、校验码（第十八位数）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#作为尾号的校验码，是由号码编制单位按统一的公式计算出来的，如果某人的尾号是0－9，都不会出现X，但如果尾号是10，那么就得用X来代替，因为如果用10做尾号，那么-此人的身份证就变成了19位。X是罗马数字的10，用X来代替10，可以保证公民的身份证符合国家标准。"><span class="toc-text">作为尾号的校验码，是由号码编制单位按统一的公式计算出来的，如果某人的尾号是0－9，都不会出现X，但如果尾号是10，那么就得用X来代替，因为如果用10做尾号，那么 此人的身份证就变成了19位。X是罗马数字的10，用X来代替10，可以保证公民的身份证符合国家标准。</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编码实现"><span class="toc-text">编码实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文档"><span class="toc-text">参考文档</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#参考文档1参考文档2"><span class="toc-text">参考文档1参考文档2</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#JavaScript"
+                           title="JavaScript">JavaScript</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="https://github.com/xiejindou">xiejindou</a></li>
+                        
+                        <li><a href="https://github.com/muguang-lijing">lijing</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/xx">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/xx">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/Guwen Guo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/guoguwen">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Guwen 2020
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://guoguwen.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','GGLszzbNi_mjH9D7fkKN','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="/img/avatare.jpeg">
+</body>
+
+</html>
